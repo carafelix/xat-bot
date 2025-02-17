@@ -1,0 +1,17 @@
+{
+    "name": "free-xat-bot",
+    "description": "Free xat.com bot created by @xlaming",
+    "author": "xlaming",
+    "license": "MIT",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "winston": "^3.11.0",
+        "ws": "^8.14.2"
+    }
+}
