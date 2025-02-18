@@ -2,7 +2,6 @@ import { WebSocket } from 'ws';
 import { createLogger, format, transports } from 'winston';
 import { promises as fs } from 'fs';
 import { XatBlogAPI } from '../api/XatBlogAPI.js';
-import { XatAPI } from '../api/XatAPI.js';
 import { xmlToArray, sanitize } from '../utils/helpers.js';
 import { PacketHandler } from './PacketHandler.js';
 import { CommandHandler } from './CommandHandler.js';
@@ -15,7 +14,6 @@ export class Bot {
         this.setupLogger();
 
         this.xatBlogAPI = new XatBlogAPI();
-        this.xatAPI = new XatAPI();
         this.packetHandler = new PacketHandler(this);
         this.commandHandler = new CommandHandler(this);
 
@@ -171,12 +169,12 @@ export class Bot {
      * Retrieves about the current chat.
     */
     async getChatInfo() {
-        const data = await this.xatAPI.chatInfo(this.settings.chat);
-        if (!data?.id) {
+        const data = await this.xatBlogAPI.chatInfo(this.settings.chat);
+        if (!data?.chat?.id) {
             this.logger.error('Chat not found');
             process.exit(1);
         }
-        this.chatInfo = data;
+        this.chatInfo = data.chat;
     }
 
     /**
