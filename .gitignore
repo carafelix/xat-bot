@@ -1,2 +1,7 @@
 *.log
 package-lock.json
+.env.local
+node_modules/
+yarn.lock
+./cache/login.json
+login.json

@@ -22,16 +22,22 @@ export default {
         });
 
         // Send welcome message
-        if (bot.settings.welcomeMsg && bot.isConnected) {
-            const welcomeMsg = bot.settings.welcomeMsg
-                .replace('{chatname}', bot.chatInfo.g)
-                .replace('{chatid}', bot.chatInfo.id)
-                .replace('{user}', packet.N || 'Unregistered')
-                .replace('{name}', packet.n.split('##')[0].replace(/\([^()]*\)/g, ''))
-                .replace('{uid}', userId);
-
-            // PM is set by default...
-            await bot.sendPM(welcomeMsg, userId);
+        if (bot.settings.welcomeMessageEnabled == 'true'){
+            if (bot.settings.welcomeMsg && bot.isConnected) {
+                const welcomeMsg = bot.settings.welcomeMsg
+                    .replace('{chatname}', bot.chatInfo.g)
+                    .replace('{chatid}', bot.chatInfo.id)
+                    .replace('{user}', packet.N || 'Unregistered')
+                    .replace('{name}', packet.n.split('##')[0].replace(/\([^()]*\)/g, ''))
+                    .replace('{uid}', userId);
+            
+                // Check if the message should be sent via PM or PC
+                if (bot.settings.welcomeMessagePMorPC === 'pc') {
+                    await bot.sendPC(welcomeMsg, userId);
+                } else {
+                    await bot.sendPM(welcomeMsg, userId);
+                }
+            }
         }
     }
 }
