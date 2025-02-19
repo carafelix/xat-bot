@@ -40,6 +40,8 @@ export class Bot {
                 home: process.env.BOT_HOME,
                 chat: process.env.BOT_CHAT,
                 welcomeMsg: process.env.WELCOME_MESSAGE,
+                welcomeMessageEnabled: process.env.ENABLE_WELCOME_MESSAGE,
+                welcomeMessagePMorPC: process.env.WELCOME_MESSAGE_PM_OR_PC,
                 commandChar: process.env.COMMAND_CHAR,
                 owners: JSON.parse(process.env.BOT_OWNERS),
                 disabledPowers: JSON.parse(process.env.DISABLED_POWERS),
