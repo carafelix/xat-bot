@@ -8,16 +8,28 @@ export default {
      * @param {string} message - Message
      * @param {string} from - Source (main, pc, pm)
     */
-    async execute(bot, xatID, message, from) {
+    async execute (bot, xatID, message, from) {
         if (!message) {
-            return await bot.reply('Usage: !reg [xat id]', xatID, from);
+            return await bot.reply(
+                'Usage: !reg [xat id]', 
+                xatID, 
+                from
+            );
         }
 
         const json = await bot.xatBlogAPI.idToReg(message);
-        if (json.username) {
-            await bot.reply(`Regname for ${message} is: ${json.username}`, xatID, from);
-        } else {
-            await bot.reply('User not found.', xatID, from);
+        if (!json.username) {
+            return await bot.reply(
+                'User not found.',
+                xatID,
+                from
+            );
         }
+
+        await bot.reply(
+            `Regname for ${message} is: ${json.username}`,
+            xatID,
+            from
+        );
     }
 }

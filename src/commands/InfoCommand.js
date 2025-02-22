@@ -8,7 +8,7 @@ export default {
      * @param {string} message - Message
      * @param {string} from - Source (main, pc, pm)
     */
-    async execute(bot, xatID, message, from) {
-        await bot.reply('This bot was created by Paulo (281199).', xatID, from);
+    async execute (bot, xatID, message, from) {
+        await bot.reply('Provided by bot.xatblog.net ;)', xatID, from);
     }
 }

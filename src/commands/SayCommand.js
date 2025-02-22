@@ -8,9 +8,9 @@ export default {
      * @param {string} message - Message
      * @param {string} from - Source (main, pc, pm)
     */
-    async execute(bot, xatID, message, from) {
+    async execute (bot, xatID, message, from) {
         if (!bot.hasPermission(xatID, from)) return;
-        
+
         await bot.sendMessage(message);
     }
 }

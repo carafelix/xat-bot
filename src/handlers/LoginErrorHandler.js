@@ -8,7 +8,7 @@ export default {
      * @param {object} bot - Bot instance
      * @param {object} packet - Packet data
     */
-    async execute(bot, packet) {
+    async execute (bot, packet) {
         if (packet.e) {
             if ([21, 36].includes(parseInt(packet.e))) {
                 return await bot.connect();
@@ -22,16 +22,14 @@ export default {
         }
 
         if (packet.n) {
-            if (bot.isLoggingIn) {
-                bot.isLoggingIn = false;
-                bot.ws.terminate();
-            }
-
             await writeFile('./cache/login.json', JSON.stringify(packet)); // Save login info
 
             bot.loginInfo = packet;
 
-            await bot.connect(); // Connect to chat
+            if (bot.isLoggingIn) {
+                bot.isLoggingIn = false;
+                bot.restart();
+            }
         }
     }
 }

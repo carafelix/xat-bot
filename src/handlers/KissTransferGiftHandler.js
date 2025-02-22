@@ -6,7 +6,7 @@ export default {
      * @param {object} bot - Bot instance
      * @param {object} packet - Packet data
     */
-    async execute(bot, packet) {
+    async execute (bot, packet) {
         if (packet.k === 'T') {
             await bot.bot.relogin();
         }

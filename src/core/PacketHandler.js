@@ -9,9 +9,9 @@ export class PacketHandler {
         this.handlersPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'handlers');
     }
 
-    async init() {
+    async init () {
         const files = fs.readdirSync(this.handlersPath).filter(file => file.endsWith('.js'));
-        
+
         for (const file of files) {
             const handler = await import(`file://${path.join(this.handlersPath, file)}`);
             if (handler.default?.name && handler.default?.execute) {
@@ -20,9 +20,9 @@ export class PacketHandler {
         }
     }
 
-    async handle(type, packet) {
+    async handle (type, packet) {
         const handler = type.toLowerCase();
-        
+
         if (this.handlers.has(handler)) {
             await this.handlers.get(handler).execute(this.bot, packet);
         }

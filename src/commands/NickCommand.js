@@ -1,5 +1,5 @@
 export default {
-    name: "char", // Command name
+    name: "nick", // Command name
 
     /**
      * Executes the command.
@@ -13,18 +13,16 @@ export default {
 
         if (!message) {
             return await bot.reply(
-                `The current command char is: ${bot.settings.char}`, 
-                xatID, 
+                `The current nick is: *${nick}*. To change it, use !nick [new nick]`,
+                xatID,
                 from
             );
         }
 
-        await bot.updateDb({ char: message });
+        await bot.updateDb({ nick: message });
 
-        await bot.reply(
-            `Char updated to: ${message}`, 
-            xatID, 
-            from
-        );
+        await bot.reply(`Nick updated to: ${message}`, xatID, from);
+
+        await bot.restart();
     },
 };

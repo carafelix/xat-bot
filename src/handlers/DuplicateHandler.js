@@ -6,7 +6,8 @@ export default {
      * @param {object} bot - Bot instance
      * @param {object} packet - Packet data
     */
-    async execute(bot, packet) {
+    async execute (bot, packet) {
         bot.logger.error('DUP');
+        process.exit(1);
     }
 }

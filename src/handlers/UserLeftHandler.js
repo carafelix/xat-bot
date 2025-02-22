@@ -8,7 +8,7 @@ export default {
      * @param {object} bot - Bot instance
      * @param {object} packet - Packet data
     */
-    async execute(bot, packet) {
+    async execute (bot, packet) {
         const uid = parseUser(packet.u);
         if (uid >= 1900000000) return;
 

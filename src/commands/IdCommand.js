@@ -8,18 +8,30 @@ export default {
      * @param {string} message - Message
      * @param {string} from - Source (main, pc, pm)
     */
-    async execute(bot, xatID, message, from) {
+    async execute (bot, xatID, message, from) {
         if (!message) {
-            return await bot.reply('Usage: !id [xat username]', xatID, from);
+            return await bot.reply(
+                'Usage: !id [xat username]',
+                xatID,
+                from
+            );
         }
 
         const json = await bot.xatBlogAPI.regToId(message);
         const xatid = json.xatid ? parseInt(json.xatid) : 0;
 
-        if (xatid > 7) {
-            await bot.reply(`ID for ${message} is: ${xatid}`, xatID, from);
-        } else {
-            await bot.reply('User not found.', xatID, from);
+        if (xatid < 7) {
+            return await bot.reply(
+                'User not found.',
+                xatID,
+                from
+            );
         }
+
+        await bot.reply(
+            `ID for ${message} is: ${xatid}`,
+            xatID,
+            from
+        );
     }
 }
