@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "dotenv": "^16.3.1",
+        "grammy": "^1.35.1",
         "sequelize": "^6.37.5",
         "sqlite3": "^5.1.7",
         "winston": "^3.11.0",
