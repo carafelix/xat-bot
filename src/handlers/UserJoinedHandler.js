@@ -21,17 +21,17 @@ export default {
             username: packet.N || null,
         });
 
-        // Fetch necessary values
-        if (bot.settings.welcome_msg && bot.settings.welcome_msg != "off") {
-            const welcomeMessage = bot.settings.welcome_msg
-                .replace("{chatname}", bot.chatInfo.name)
-                .replace("{chatid}", bot.chatInfo.id)
-                .replace("{user}", packet.N || "Unregistered")
-                .replace("{name}", packet.n.split("##")[0].replace(/\([^()]*\)/g, ""))
-                .replace("{uid}", userId);
+        // // Fetch necessary values
+        // if (bot.settings.welcome_msg && bot.settings.welcome_msg != "off") {
+        //     const welcomeMessage = bot.settings.welcome_msg
+        //         .replace("{chatname}", bot.chatInfo.name)
+        //         .replace("{chatid}", bot.chatInfo.id)
+        //         .replace("{user}", packet.N || "Unregistered")
+        //         .replace("{name}", packet.n.split("##")[0].replace(/\([^()]*\)/g, ""))
+        //         .replace("{uid}", userId);
 
-            // Send message via PM/PC
-            await bot.reply(welcomeMessage, userId, bot.settings.welcome_type);
-        }
+        //     // Send message via PM/PC
+        //     await bot.reply(welcomeMessage, userId, bot.settings.welcome_type);
+        // }
     },
 };
