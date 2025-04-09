@@ -113,7 +113,7 @@ export class Bot {
         //  Websocket got a message
         ws.on("message", async (data) => {
             try {
-                this.logger.info(`<< ${data}`);
+                // this.logger.info(`<< ${data}`);
                 const packets = xmlToArray(data.toString());
                 for (const [type, packet] of packets) {
                     await this.packetHandler.handle(type, packet);
