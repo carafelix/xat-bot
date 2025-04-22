@@ -27,7 +27,8 @@ export default {
         const match = txt.match(quoteRegex);
 
         if(match){
-            txt = txt.replace(match[0],`\n>${match[2]}\n`)
+            txt = txt.replace(match[0],'')
+            txt = `>${match[2]}\n` + txt
         }
         
         try {
