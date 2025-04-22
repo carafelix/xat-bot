@@ -63,7 +63,7 @@ export default {
 
         if (match) {
             txt = txt.replace(match[0], '')
-            txt = escapeMarkdown(`>${match[2]}\n` + txt)
+            txt = '>' + escapeMarkdown(`${match[2]}\n` + txt)
         }
         try {
             api.sendMessage(CHAT_ID, txt, {
