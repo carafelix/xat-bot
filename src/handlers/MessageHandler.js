@@ -21,14 +21,21 @@ export default {
                 .get(uid)
                 ?.name?.split('##')[0]
                 ?.replace(/\([^()]*\)/g, '') || 'UNKNOWN'
-        const txt = user.trim() + ': ' + packet.t
+        let txt = user.trim() + ': ' + packet.t
 
+        const quoteRegex = /❯#([^\[\]\s]+)\[([^\]]+)\]/m
+        const match = txt.match(quoteRegex);
+
+        if(match){
+            txt = txt.replace(match[0],`\n>${match[2]}\n`)
+        }
+        
         try {
             exec(
-                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d txt="${txt}"`
+                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id="${CHAT_ID}" -d text="${txt}" ${match ? '-d parse_mode="MarkdownV2"' : ''}`
             )
-        } catch (error) {
-            bot.logger.error('Photo Error:', error)
+        } catch (error){
+            bot.logger.error(error)
         }
     },
 }
