@@ -23,12 +23,28 @@ export default {
                 ?.replace(/\([^()]*\)/g, '') || 'UNKNOWN'
         const txt = user.trim() + ': ' + packet.t
 
+        let avatar = bot.users.get(uid)?.avatar
+
+        if(typeof +avatar === 'number'){
+            avatar = `https://www.xat.com/web_gear/chat/av/${avatar}.png`
+        } else if (`${avatar}`.includes("https://xatimg.com/image/")){
+            
+        } else {
+            avatar = `https://www.xat.com/web_gear/chat/av/177.png`
+        }
+        
+
         try {
             exec(
-                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="${txt}"`
+                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto -d chat_id=${CHAT_ID} -d photo=${avatar} -d caption="${txt}"`
             )
-        } catch (error) {
-            console.log(error)
+        } catch (photoError) {
+            try {
+                exec()
+            } catch (msgError) {
+                bot.logger.error('Message error:',msgError)
+            }
+            bot.logger.error('Photo Error:',photoError)
         }
     },
 }
