@@ -25,12 +25,8 @@ export default {
 
         let avatar = bot.users.get(uid)?.avatar
 
-        if(typeof +avatar === 'number'){
+        if(+avatar > 0){
             avatar = `https://www.xat.com/web_gear/chat/av/${avatar}.png`
-        } else if (`${avatar}`.includes("https://xatimg.com/image/")){
-            
-        } else {
-            avatar = `https://www.xat.com/web_gear/chat/av/177.png`
         }
         
 
