@@ -25,7 +25,7 @@ export default {
 
         try {
             exec(
-                `curl -X POST https://api.telegram.org/bot7686568013:AAHxgT7xMFyMRpUQR3I-3pQ2LGWuR2a_cFw/sendMessage -d chat_id=@xatrelive -d text="${txt}"`
+                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="${txt}"`
             )
         } catch (error) {
             console.log(error)
