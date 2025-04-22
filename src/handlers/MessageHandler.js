@@ -36,13 +36,13 @@ export default {
 
         try {
             exec(
-                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto -d chat_id=${CHAT_ID} -d photo=${avatar} -d caption="${txt}"`
+                `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto -d chat_id="${CHAT_ID}" -d photo="${avatar}" -d caption="${txt}"`
             )
         } catch (photoError) {
             bot.logger.error('Photo Error:', photoError)
             try {
                 exec(
-                    `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d -d txt="${txt}"`
+                    `curl -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage -d chat_id="${CHAT_ID}" -d -d txt="${txt}"`
                 )
             } catch (msgError) {
                 bot.logger.error('Message error:',msgError)
