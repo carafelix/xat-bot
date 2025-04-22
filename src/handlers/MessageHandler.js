@@ -1,11 +1,9 @@
 import { parseUser } from '../utils/helpers.js'
 import { Api } from 'grammy'
-import { autoRetry } from "@grammyjs/auto-retry";
 
 const BOT_TOKEN = process.env.TG_BOT_TOKEN
 const CHAT_ID = process.env.TG_CHAT_ID
-const api = new Api(BOT_TOKEN);
-api.config.use(autoRetry)
+const api = new Api(BOT_TOKEN)
 
 export default {
     name: 'm', // Packet name
