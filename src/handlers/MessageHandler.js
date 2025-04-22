@@ -1,12 +1,43 @@
 import { parseUser } from '../utils/helpers.js'
 import { Api } from 'grammy'
-import { autoRetry } from "@grammyjs/auto-retry";
+import { autoRetry } from '@grammyjs/auto-retry'
 
 const BOT_TOKEN = process.env.TG_BOT_TOKEN
 const CHAT_ID = process.env.TG_CHAT_ID
 const api = new Api(BOT_TOKEN)
 api.config.use(autoRetry())
 
+const SPECIAL_CHARS = [
+    '\\',
+    '_',
+    '*',
+    '[',
+    ']',
+    '(',
+    ')',
+    '~',
+    '`',
+    '>',
+    '<',
+    '&',
+    '#',
+    '+',
+    '-',
+    '=',
+    '|',
+    '{',
+    '}',
+    '.',
+    '!',
+]
+
+function escapeMarkdown(text) {
+    SPECIAL_CHARS.forEach(
+        (char) =>
+            (text = text.replaceAll(char, `\\${char}`))
+    )
+    return text
+}
 
 export default {
     name: 'm', // Packet name
@@ -32,7 +63,7 @@ export default {
 
         if (match) {
             txt = txt.replace(match[0], '')
-            txt = `>${match[2]}\n` + txt
+            txt = escapeMarkdown(`>${match[2]}\n` + txt)
         }
         try {
             api.sendMessage(CHAT_ID, txt, {
