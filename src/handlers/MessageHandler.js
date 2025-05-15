@@ -8,7 +8,7 @@ const api = new Api(BOT_TOKEN)
 api.config.use(autoRetry())
 
 const SPECIAL_CHARS = [
-    '\\',
+	'\\',
     '_',
     '*',
     '[',
@@ -48,28 +48,40 @@ export default {
      * @param {object} packet - Packet data
      */
     async execute(bot, packet) {
-        if (packet.s === '1' || packet.t[0] === '/') return
+        if (packet.s === '1' || packet.t[0] === '/' || packet.t.split(' ').length < 3) return
 
         const uid = parseUser(packet.u)
-        const user =
+        if (uid == 1510151) return;
+      
+        let user =
             bot.users
                 .get(uid)
-                ?.name?.split('##')[0]
-                ?.replace(/\([^()]*\)/g, '') || 'UNKNOWN'
-        let txt = user.trim() + ': ' + packet.t
+                ?.name?.split('##')[0];
 
-        const quoteRegex = /❯#([^\[\]\s]+)\[([^\]]+)\]/m
+        if(!/^\([^()]*\)$/.test(user)){
+                user = user?.replace(/\([^()]*\)/g, '')
+        }
+                user = user?.replaceAll(/\s/g, '')?.trim()  || 'UNKNOWN'
+
+        let txt = escapeMarkdown(user + ': ' + packet.t)
+
+
+        const quoteRegex = /(❯.+\])(.{0,})/m
+
         const match = txt.match(quoteRegex)
 
         if (match) {
-            txt = txt.replace(match[0], '')
-            txt = '>' + escapeMarkdown(`${match[2]}\n` + txt)
+            txt = txt.replace(match[1], '')
+            if(txt.split(' ').length < 4) return;
+            const first = match[1].indexOf('[') + 1
+            const last = match[1].lastIndexOf(']') - 1
+            
+            txt = '>' + match[1].slice(first,last).trim() + '\n' + txt 
         }
+        
         try {
             api.sendMessage(CHAT_ID, txt, {
-                parse_mode: match
-                    ? 'MarkdownV2'
-                    : undefined,
+                parse_mode: 'MarkdownV2',
                 link_preview_options: {
                     prefer_small_media: true,
                 },
