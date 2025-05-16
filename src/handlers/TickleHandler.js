@@ -9,14 +9,14 @@ export default {
      * @param {object} packet - Packet data
     */
     async execute (bot, packet) {
-        const uid = parseUser(packet.u);
-
-        if (!bot.users.has(uid)) return;
-
-        await bot.send('z', {
-            d: uid,
-            u: bot.loginInfo.i,
-            t: '/aon'
-        });
+//         const uid = parseUser(packet.u);
+// 
+//         if (!bot.users.has(uid)) return;
+// 
+//         await bot.send('z', {
+//             d: uid,
+//             u: bot.loginInfo.i,
+//             t: '/aon'
+//         });
     }
 }
