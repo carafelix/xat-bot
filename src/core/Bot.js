@@ -82,7 +82,7 @@ export class Bot {
         var loginData;
 
         try {
-            // loginData = JSON.parse(await fs.readFile("./cache/login.json", "utf-8"));
+            loginData = JSON.parse(await fs.readFile("./cache/login.json", "utf-8"));
         } catch { }
 
         if (loginData?.i === undefined) {
