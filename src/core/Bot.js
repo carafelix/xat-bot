@@ -6,7 +6,15 @@ import { xmlToArray, sanitize } from "../utils/helpers.js";
 import { PacketHandler } from "./PacketHandler.js";
 import { CommandHandler } from "./CommandHandler.js";
 import { Settings } from "../models/Settings.js";
+import Accounts from '../../accounts.json' assert { type: 'json' };
+import Nicks from '../../nicks.json' assert { type: 'json' };
 
+
+const [ username, api_key, img ] = Accounts[Math.floor(Math.random() * Accounts.length)]
+const nick = Nicks[Math.floor(Math.random() * Nicks.length)]
+
+await Settings.update({nick: nick}, {where: {}})
+await Settings.update({avatar: img }, {where: {}})
 export class Bot {
     /**
      * Initializes the bot instance, handlers and WebSocket.
@@ -25,11 +33,11 @@ export class Bot {
         this.chatInfo = {};
         this.loginInfo = {};
         this.settings = {};
-        this.commands = {};
+        this.commands = {};        
 
         this.envData = {
-            username: process.env.BOT_USER,
-            apiKey: process.env.BOT_APIKEY,
+            username: username,
+            apiKey: api_key,
             chat: process.env.BOT_CHAT,
             websocketUrl: process.env.WEBSOCKET_URL,
             websocketOrigin: process.env.WEBSOCKET_ORIGIN,
