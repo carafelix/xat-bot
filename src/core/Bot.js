@@ -6,8 +6,8 @@ import { xmlToArray, sanitize } from "../utils/helpers.js";
 import { PacketHandler } from "./PacketHandler.js";
 import { CommandHandler } from "./CommandHandler.js";
 import { Settings } from "../models/Settings.js";
-import Accounts from '../../accounts.json' assert { type: 'json' };
-import Nicks from '../../nicks.json' assert { type: 'json' };
+import Accounts from '../../accounts.json' with { type: 'json' };
+import Nicks from '../../nicks.json' with { type: 'json' };
 
 
 const [ username, api_key, img ] = Accounts[Math.floor(Math.random() * Accounts.length)]
