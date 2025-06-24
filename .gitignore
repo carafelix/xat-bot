@@ -6,3 +6,4 @@ yarn.lock
 ./cache/login.json
 login.json
 .env
+accounts.json
