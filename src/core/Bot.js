@@ -36,8 +36,8 @@ export class Bot {
         this.commands = {};        
 
         this.envData = {
-            username: username,
-            apiKey: api_key,
+            username: username | process.env.BOT_USER,
+            apiKey: api_key | process.env.BOT_APIKEY,
             chat: process.env.BOT_CHAT,
             websocketUrl: process.env.WEBSOCKET_URL,
             websocketOrigin: process.env.WEBSOCKET_ORIGIN,
