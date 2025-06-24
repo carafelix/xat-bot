@@ -13,8 +13,10 @@ import Nicks from '../../nicks.json' with { type: 'json' };
 const [ username, api_key, img ] = Accounts[Math.floor(Math.random() * Accounts.length)]
 const nick = Nicks[Math.floor(Math.random() * Nicks.length)]
 
-await Settings.update({nick: nick}, {where: {}})
-await Settings.update({avatar: img }, {where: {}})
+try {
+    await Settings.update({nick: nick}, {where: {}})
+    await Settings.update({avatar: img }, {where: {}})
+} catch {}
 export class Bot {
     /**
      * Initializes the bot instance, handlers and WebSocket.
